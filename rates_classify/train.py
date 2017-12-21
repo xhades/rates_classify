@@ -13,12 +13,13 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, LabelEncoder
 from sklearn.naive_bayes import BernoulliNB
 import pickle
+from sklearn import svm
 
 np.set_printoptions(threshold=np.inf)
 
 
 # 训练集测试集 3/7分割
-def split_train_test(xFile, yFile):
+def train(xFile, yFile):
     with open(xFile, "rb") as file_r:
         X = pickle.load(file_r)
 
@@ -35,7 +36,7 @@ def split_train_test(xFile, yFile):
     Y = integerEncoded.reshape(212841, )
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3, random_state=42)
 
-    # 训练数据
+    # 朴素贝叶斯训练数据
     clf = BernoulliNB()
     clf.fit(X_train, Y_train)
 
@@ -45,10 +46,20 @@ def split_train_test(xFile, yFile):
     for p, t in zip(predict, Y_test):
         if p == t:
             count += 1
-    print("Accuracy is:", count/len(Y_test))
+    print("Bayes Accuracy is:", count/len(Y_test))
+
+    # SVM
+    svmClf = svm.SVC()
+    svmClf.fit(X_train, Y_train)
+    svmpredict = svmClf.predict(X_test)
+    svmcount = 0
+    for p, t in zip(svmpredict, Y_test):
+        if p == t:
+            svmcount += 1
+    print("SVM Accuracy is:", svmcount / len(Y_test))
 
 if __name__ == "__main__":
     xFile = "Res/char_embedded.pkl"
     yFile = "data/label.txt"
 
-    split_train_test(xFile, yFile)
+    train(xFile, yFile)
