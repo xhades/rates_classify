@@ -2,7 +2,9 @@
 > 少年壮志不言愁
 > 劝君惜取少年时
 
-[原文链接](https://www.jianshu.com/p/e754d10f4fe6)
+#### [原文链接](https://www.jianshu.com/p/e754d10f4fe6)
+
+
 ![图片来自网络](http://upload-images.jianshu.io/upload_images/3818161-f545b252c2d70e45.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 **贝叶斯定理：**
