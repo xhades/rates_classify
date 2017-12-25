@@ -177,6 +177,9 @@ def train(xFile, yFile):
 
 最终使用朴素贝叶斯分类器最终准确率在73%左右，分类效果还算不错=。=
 
+=====================================12.25更新=============================================
+- 添加决策树分类代码[dtClf.py](https://github.com/xhades/rates_classify/blob/master/rates_classify/dtClf.py)
+
 完整代码查看[rates_classify](https://github.com/xhades/rates_classify)
 
 
