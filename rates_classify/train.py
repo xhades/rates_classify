@@ -8,6 +8,7 @@
 """
 import pandas as pd
 import numpy as np
+from numpy import *
 from numpy import array, argmax
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, LabelEncoder
@@ -22,6 +23,8 @@ np.set_printoptions(threshold=np.inf)
 def train(xFile, yFile):
     with open(xFile, "rb") as file_r:
         X = pickle.load(file_r)
+    # print(X.shape)
+    X = reshape(X, (212841, -1))  # reshape一下 （212841, 30*128）
 
     # 读取label数据，并且One-Hot Encoding
     with open(yFile, "r") as yFile_r:
@@ -34,19 +37,19 @@ def train(xFile, yFile):
 
     # 获得label one hot 编码
     Y = integerEncoded.reshape(212841, )
-    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.001, random_state=42)
-    print(X_test[1].shape)
-    # # 朴素贝叶斯训练数据
-    # clf = BernoulliNB()
-    # clf.fit(X_train, Y_train)
-    #
-    # # 测试数据
-    # predict = clf.predict(X_test)
-    # count = 0
-    # for p, t in zip(predict, Y_test):
-    #     if p == t:
-    #         count += 1
-    # print("Bayes Accuracy is:", count/len(Y_test))
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3, random_state=42)
+    # print(X_test[1].shape)
+    # 朴素贝叶斯训练数据
+    clf = BernoulliNB()
+    clf.fit(X_train, Y_train)
+
+    # 测试数据
+    predict = clf.predict(X_test)
+    count = 0
+    for p, t in zip(predict, Y_test):
+        if p == t:
+            count += 1
+    print("Bayes Accuracy is:", count/len(Y_test))
 
     # SVM
     print("-->")

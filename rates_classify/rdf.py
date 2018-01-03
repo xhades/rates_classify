@@ -10,6 +10,7 @@
 # 随机森林分类器
 
 import numpy as np
+from numpy import *
 from numpy import array, argmax
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
@@ -24,6 +25,8 @@ np.set_printoptions(threshold=np.inf)
 def train(xFile, yFile):
     with open(xFile, "rb") as file_r:
         X = pickle.load(file_r)
+
+    X = reshape(X, (212841, -1))  # reshape一下 （212841, 30*128）
 
     # 读取label数据，并且encodig
     with open(yFile, "r") as yFile_r:

@@ -11,7 +11,7 @@
 
 
 import numpy as np
-from numpy import array, argmax
+from numpy import array, argmax, reshape
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 import pickle
@@ -25,6 +25,7 @@ np.set_printoptions(threshold=np.inf)
 def train(xFile, yFile):
     with open(xFile, "rb") as file_r:
         X = pickle.load(file_r)
+    X = reshape(X, (212841, -1))  # reshape一下 （212841, 30*128）
 
     # 读取label数据，并且One-Hot Encoding
     with open(yFile, "r") as yFile_r:
