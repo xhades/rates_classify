@@ -23,7 +23,7 @@ def train(xFile, yFile):
     with open(xFile, "rb") as file_r:
         X = pickle.load(file_r)
 
-    # 读取label数据，并且One-Hot Encoding
+    # 读取label数据，并且 Encoding
     with open(yFile, "r") as yFile_r:
         labelLines = [_.strip("\n") for _ in yFile_r.readlines()]
     values = array(labelLines)
@@ -36,8 +36,8 @@ def train(xFile, yFile):
     Y = integerEncoded.reshape(212841, )
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3, random_state=42)
 
-    # 分类器
-    clf = GBC(criterion="friedman_mse")
+    # 梯度提升分类器
+    clf = GBC(loss="deviance", subsample=0.8, criterion="friedman_mse")
 
     clf.fit(X_train, Y_train)
 
@@ -53,5 +53,6 @@ def train(xFile, yFile):
 if __name__ == "__main__":
     xFile = "Res/char_embedded.pkl"
     yFile = "data/label.txt"
-
+    print("Start Training.....")
     train(xFile, yFile)
+    print("End.....")

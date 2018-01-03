@@ -34,29 +34,30 @@ def train(xFile, yFile):
 
     # 获得label one hot 编码
     Y = integerEncoded.reshape(212841, )
-    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3, random_state=42)
-
-    # 朴素贝叶斯训练数据
-    clf = BernoulliNB()
-    clf.fit(X_train, Y_train)
-
-    # 测试数据
-    predict = clf.predict(X_test)
-    count = 0
-    for p, t in zip(predict, Y_test):
-        if p == t:
-            count += 1
-    print("Bayes Accuracy is:", count/len(Y_test))
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.001, random_state=42)
+    print(X_test[1].shape)
+    # # 朴素贝叶斯训练数据
+    # clf = BernoulliNB()
+    # clf.fit(X_train, Y_train)
+    #
+    # # 测试数据
+    # predict = clf.predict(X_test)
+    # count = 0
+    # for p, t in zip(predict, Y_test):
+    #     if p == t:
+    #         count += 1
+    # print("Bayes Accuracy is:", count/len(Y_test))
 
     # SVM
-    svmClf = svm.SVC()
-    svmClf.fit(X_train, Y_train)
-    svmpredict = svmClf.predict(X_test)
-    svmcount = 0
-    for p, t in zip(svmpredict, Y_test):
-        if p == t:
-            svmcount += 1
-    print("SVM Accuracy is:", svmcount / len(Y_test))
+    print("-->")
+    # svmClf = svm.SVC(kernel="rbf")
+    # svmClf.fit(X_train, Y_train)
+    # svmpredict = svmClf.predict(X_test)
+    # svmcount = 0
+    # for p, t in zip(svmpredict, Y_test):
+    #     if p == t:
+    #         svmcount += 1
+    # print("SVM Accuracy is:", svmcount / len(Y_test))
 
 if __name__ == "__main__":
     xFile = "Res/char_embedded.pkl"
